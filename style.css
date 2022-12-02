@@ -28,8 +28,6 @@ main {
   width: 100rem;
   height: 60rem;
   background-color: rgba(255, 255, 255, 0.35);
-  /* backdrop-filter: blur(200px); */
-  /* filter: blur(); */
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.25);
   border-radius: 9px;
   overflow: hidden;
@@ -102,21 +100,21 @@ main {
 }
 
 /* ABSOLUTE POSITIONED ELEMENTS */
-/* .btn {
+.btn {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   color: #444;
-  background: none;
+  /* background: none; */
   border: none;
   font-family: inherit;
   font-size: 1.8rem;
   text-transform: uppercase;
   cursor: pointer;
   font-weight: 400;
-  transition: all 0.2s;
+  /* transition: all 0.2s; */
 
-  background-color: white;
+  /* background-color: white; */
   background-color: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(10px);
 
@@ -131,34 +129,34 @@ main {
   margin-right: 0.7rem;
 }
 
-.btn--new {
+.btn-new {
   top: 4rem;
 }
-.btn--roll {
+.btn-roll {
   top: 39.3rem;
 }
-.btn--hold {
+.btn-hold {
   top: 46.1rem;
 }
 
 .btn:active {
-  transform: translate(-50%, 3px);
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+  /* transform: translate(-50%, 3px); */
+  /* box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15); */
 }
 
 .btn:focus {
-  outline: none;
+  /* outline: none; */
 }
 
 .dice {
   position: absolute;
+  height: 10rem;
   left: 50%;
   top: 16.5rem;
   transform: translateX(-50%);
-  height: 10rem;
   box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.2);
 }
-
+/*
 .player--winner {
   background-color: #2f2f2f;
 }
@@ -166,4 +164,4 @@ main {
 .player--winner .name {
   font-weight: 700;
   color: #c7365f;
-} */
+}  */
