@@ -5,18 +5,9 @@ const btnNew = document.querySelector('.btn-new');
 const dice = document.querySelector('.dice');
 const players = document.querySelectorAll('.players');
 
-// const currentP1 = document.querySelector('.current-p1');
-// const currentP2 = document.querySelector('.current-p2');
-
-
-let currentSum = 0;
 
 function currentPlayer(){
-  if (players[0].classList.contains('player-active')) {
-    return 1;
-  } else {
-    return 2;
-  }
+  return players[0].classList.contains('player-active')? 1 : 2;
 }
 
 function changeActivePlayer(){
@@ -24,14 +15,20 @@ function changeActivePlayer(){
   players[1].classList.toggle('player-active');
 }
 
+//reset to 0 players current score
+function resetSum(){
+  document.querySelector(`.sum-p${currentPlayer()}`).textContent = 0;
+}
+
 //Roll dice
 function rollDice() {
+  currentSum = Number(document.querySelector(`.sum-p${currentPlayer()}`).textContent);
   let number = Math.floor(Math.random() * 6) + 1;
   dice.src = `./dice_images/dice-${number}.png`;
   dice.style.display = 'block';
   if (number === 1) {
     currentSum = 0;
-    document.querySelector(`.sum-p${currentPlayer()}`).textContent = 0;
+    resetSum();
     changeActivePlayer();
   } else {
     currentSum += number;
@@ -40,12 +37,24 @@ function rollDice() {
 }
 
 //Hold score
-
 function holdScore(){
+  currentSum = Number(document.querySelector(`.sum-p${currentPlayer()}`).textContent);
+  let score = Number(document.querySelector(`#score-p${currentPlayer()}`).textContent);
+  document.querySelector(`#score-p${currentPlayer()}`).textContent = score + currentSum;
+  resetSum();
+  changeActivePlayer();
+}
 
-
+function resetGame() {
+  document.querySelector(`.sum-p${currentPlayer()}`).textContent = 0;
+  document.querySelector(`#score-p1`).textContent = 0;
+  document.querySelector(`#score-p2`).textContent = 0;
+  dice.style.display = 'none';
+  if (players[1].classList.contains('player-active')) {
+    changeActivePlayer();
+  }
 }
 
 btnRoll.addEventListener('click',rollDice);
-console.log(currentPlayer);
 btnHold.addEventListener('click', holdScore);
+btnNew.addEventListener('click',resetGame);
