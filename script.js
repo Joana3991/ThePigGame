@@ -6,17 +6,17 @@ const dice = document.querySelector('.dice');
 const players = document.querySelectorAll('.players');
 
 
-function currentPlayer(){
+function currentPlayer() {
   return players[0].classList.contains('player-active')? 1 : 2;
 }
 
-function changeActivePlayer(){
+function changeActivePlayer() {
   players[0].classList.toggle('player-active');
   players[1].classList.toggle('player-active');
 }
 
 //reset to 0 players current score
-function resetSum(){
+function resetSum() {
   document.querySelector(`.sum-p${currentPlayer()}`).textContent = 0;
 }
 
@@ -36,13 +36,26 @@ function rollDice() {
   }
 }
 
+//Player wins
+function endGame() {
+  document.querySelector(`.player-${currentPlayer()}`).classList.add('player-winner');
+  dice.style.display = 'none';
+  btnRoll.removeEventListener('click', rollDice);
+  btnHold.removeEventListener('click', holdScore);
+}
+
 //Hold score
-function holdScore(){
+function holdScore() {
   currentSum = Number(document.querySelector(`.sum-p${currentPlayer()}`).textContent);
   let score = Number(document.querySelector(`#score-p${currentPlayer()}`).textContent);
-  document.querySelector(`#score-p${currentPlayer()}`).textContent = score + currentSum;
-  resetSum();
-  changeActivePlayer();
+  score += currentSum;
+  document.querySelector(`#score-p${currentPlayer()}`).textContent = score;
+  if (score >= 10) {
+    endGame();
+  } else {
+    resetSum();
+    changeActivePlayer();
+  }
 }
 
 function resetGame() {
@@ -53,6 +66,9 @@ function resetGame() {
   if (players[1].classList.contains('player-active')) {
     changeActivePlayer();
   }
+  document.querySelector(`.player-${currentPlayer()}`).classList.remove('player-winner');
+  btnRoll.addEventListener('click',rollDice);
+  btnHold.addEventListener('click', holdScore);
 }
 
 btnRoll.addEventListener('click',rollDice);
